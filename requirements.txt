@@ -1,0 +1,2 @@
+fondant==0.8.0
+fondant[component]==0.8.0

@@ -1,0 +1,66 @@
+name: Index Elasticsearch
+description: Component that can create an Elasticsearch index and index embeddings of text into it.
+image: fndnt/index_elasticsearch:dev
+tags:
+  - Data writing
+
+consumes:
+  text:
+    type: string
+  embedding:
+    type: array
+    items:
+      type: float32
+
+args:
+  index_name:
+    description: The name of the ElasticSearch index to create.
+    type: str
+  index_body:
+    description: Parameters that specify index settings, mappings, and aliases for newly created index.
+    type: dict
+  basic_auth:
+    description: >-
+      The dictionary with username and password for basic authentication.
+      Format: {"username": <user>, password": <pass>}.
+    type: dict
+    default: None
+  cloud_id:
+    description: The cloud ID of the ElasticSearch cluster. Only for Elastic Cloud.
+    type: str
+    default: None
+  api_key:  
+    description: >-
+      The API key for authentication in Elastic Cloud. Only for self-managed ElasticSearch clusters.
+      Format: {"id": <id>, "api_key": <api_key>}.
+    type: dict
+    default: None
+  bearer_auth:
+    description: The bearer token of the ElasticSearch cluster. Only for self-managed ElasticSearch clusters.
+    type: str
+    default: None
+  hosts:
+    description: >-
+      List of URLs that represent the nodes that should be used. One URL should be specified per node.
+      Format of URL: https://localhost:<port>. Only for self-managed ElasticSearch clusters.
+    type: list
+    default: None
+  ca_certs:
+    description: >-
+      The path to the CA certificates file. Used to verify HTTPS with CA certificates. Only for self-managed ElasticSearch clusters.
+      If you don't specify ca_certs or ssl_assert_fingerprint then the certifi package will be used for ca_certs by default if available.
+      More information: https://www.elastic.co/guide/en/elasticsearch/client/python-api/current/connecting.html#_verifying_https_with_ca_certificates
+    type: str
+    default: None
+  ssl_assert_fingerprint:
+    description: >-
+      Certificate fingerprint value, used to verify HTTPS. Only for self-managed ElasticSearch clusters.
+      If you don't specify ca_certs or ssl_assert_fingerprint then the certifi package will be used for ca_certs by default if available.
+      More information: https://www.elastic.co/guide/en/elasticsearch/client/python-api/current/connecting.html#_verifying_https_with_certificate_fingerprints_python_3_10_or_later
+    type: str
+    default: None
+  verify_certs:
+    description: >-
+      A boolean flag indicating whether to verify SSL certificates when connecting to the ElasticSearch cluster.
+    type: bool
+    default: True
